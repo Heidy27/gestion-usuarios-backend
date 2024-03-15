@@ -1,25 +1,25 @@
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+// Cargar la configuración del archivo appsettings.json
+builder.Configuration.AddJsonFile("appsettings.json", optional: false);
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+// Configurar el servicio de configuración
+app.Services.AddSingleton(builder.Configuration);
 
-app.UseHttpsRedirection();
+// Agregar servicios necesarios
+app.Services.AddControllers();
+app.Services.AddEndpointsApiExplorer();
+app.Services.AddSwaggerGen();
 
-app.UseAuthorization();
+// Obtener la cadena de conexión de la configuración
+var connectionString = builder.Configuration.GetConnectionString("umbracoDbDSN");
 
-app.MapControllers();
+// Configurar DbContext con la cadena de conexión
+app.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlServer(connectionString));
+
+// Configure middleware...
 
 app.Run();
