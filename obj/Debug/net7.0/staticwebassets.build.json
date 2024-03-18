@@ -1,8 +1,8 @@
 {
   "Version": 1,
-  "Hash": "nl191UcOToEjF+4XqoOG3FhJKHBNLCv1pwQSXKDZRIY=",
-  "Source": "gestionDeUsuario",
-  "BasePath": "_content/gestionDeUsuario",
+  "Hash": "dyzwvkOxnxjCmXZG3xXLFi4k8y1bTfZggBeWsv4n6Hk=",
+  "Source": "gestionDeUsuario.API",
+  "BasePath": "_content/gestionDeUsuario.API",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
